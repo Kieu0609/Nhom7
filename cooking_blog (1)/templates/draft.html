@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% comment %} <section id="slider" class="position-relative padding-xlarge no-padding-top">
+
+	<div class="container">
+
+		<div class="swiper main-slider overflow-hidden">
+		    <div class="swiper-wrapper">
+
+		        <div class="swiper-slide">
+					<img src="images/slider-img1.jpg" class="slider-img img-fluid">
+				  	<div class="carousel-text text-start">
+				        <div class="story-title-wrap mt-3">
+							<div class="post-meta"><a href="blog.html">Fashion</a></div>
+							<h2 class="story-title"><a href="single-post.html">The most powerful small sized robots in the world</a></h2>				
+							<p>How did the hand pies look? Did you love the brownies? How many choux did you eat in one sitting? After  a gorgeous selection of our favorites for a client to send as a new year’s gift.</p>
+							<div class="entry-meta">
+								<span class="author"><span class="sp">by</span><span class="author-name">Jenny Matt</span></span>
+								<span class="meta-date"><span class="sp">-</span><time class="published" datetime="">Feb 12, 2022</time></span>
+							</div>
+						</div>
+				    </div>
+				</div>
+
+				<div class="swiper-slide">
+					<img src="images/slider-img2.jpg" class="slider-img img-fluid">
+				  	<div class="carousel-text text-start">
+				        <div class="story-title-wrap mt-3">
+							<div class="post-meta"><a href="blog.html">Fashion</a></div>
+							<h2 class="story-title"><a href="single-post.html">The most powerful small sized robots in the world</a></h2>				
+							<p>How did the hand pies look? Did you love the brownies? How many choux did you eat in one sitting? After  a gorgeous selection of our favorites for a client to send as a new year’s gift.</p>
+							<div class="entry-meta">
+								<span class="author"><span class="sp">by</span><span class="author-name">Jenny Matt</span></span>
+								<span class="meta-date"><span class="sp">-</span><time class="published" datetime="">Feb 12, 2022</time></span>
+							</div>
+						</div>
+				    </div>
+				</div>
+
+				<div class="swiper-slide">
+					<img src="images/slider-img3.jpg" class="slider-img img-fluid">
+				  	<div class="carousel-text text-start">
+				        <div class="story-title-wrap mt-3">
+							<div class="post-meta"><a href="blog.html">Fashion</a></div>
+							<h2 class="story-title"><a href="single-post.html">The most powerful small sized robots in the world</a></h2>				
+							<p>How did the hand pies look? Did you love the brownies? How many choux did you eat in one sitting? After  a gorgeous selection of our favorites for a client to send as a new year’s gift.</p>
+							<div class="entry-meta">
+								<span class="author"><span class="sp">by</span><span class="author-name">Jenny Matt</span></span>
+								<span class="meta-date"><span class="sp">-</span><time class="published" datetime="">Feb 12, 2022</time></span>
+							</div>
+						</div>
+				    </div>
+				</div>
+		    </div>
+		</div>
+	    <div class="swiper-icon swiper-arrow slider-arrow-next position-absolute top-0 bottom-0 end-0 d-flex align-items-center">
+          <a href="#"><svg class="bi" width="60" height="60"><use xlink:href="#long-arrow-alt-right"></use></svg></a>
+        </div>
+	    <div class="swiper-icon swiper-arrow slider-arrow-prev position-absolute top-0 bottom-0 start-0 d-flex align-items-center">
+          <a href="#"><svg class="bi" width="60" height="60"><use xlink:href="#long-arrow-alt-left"></use></svg></a>
+        </div>
+        <div class="swiper-pagination main-slider-pagination"></div>
+
+	</div>
+</section> {% endcomment %}
+
+
+
+<section id="blog-section" class="margin-large no-margin-bottom">
+	<div class="container">
+		<div class="title-wrap d-flex justify-content-between">			
+			<div class="section-header">
+				<h4 class="elementary-title">Top Reviews</h4>
+			</div><!--section-header-->
+			<!-- <a href="blog.html" class="button">All reviews<svg class="bi" width="18" height="18"><use xlink:href="#chevron-forward"></use></svg></a> -->
+		</div>
+		<div class="row">	
+			{% for posts in draft_blog %}
+			<div class="post-item col-md-3">
+				<figure class="zoom-effect">
+					<a href="single-post.html" class="zoom-in"><img src="/media/{{posts.image}}" alt="stories" width ="306px" height ="458px" class="lgpostImg "></a>
+				</figure>
+				<div class="story-title-wrap mt-3">
+					<div class="post-meta"><a href="blog.html">{{posts.title}}</a></div>
+					<h3 class="story-title"><a href="single-post.html">{{posts.content|truncatechars:50}}</a></h3>	
+					
+					<div class="entry-meta">
+						<span class="author"><span class="sp">by: nguyet kieu</span><span class="author-name">{{posts.authur}}</span></span>
+						<span class="meta-date"><span class="sp">-</span><time class="published" datetime="">{{posts.dateTime}}</time></span>
+						
+					</div>
+					<br> 
+                    <a href="{% url 'push_blog_post' posts.slug %} "><button type="button" onclick="showSuccessAlert()" class="btn btn-outline-info"style="border-radius: 10px;">Push</button></a>
+					<a href="{% url 'edit_blog_post' posts.id %} "><button type="button" class="btn btn-outline-success"style="border-radius: 10px;">Update</button></a>
+					<a href="{% url 'delete_blog_post' posts.id %}"><button type="button"  class="btn btn-outline-danger"style="border-radius: 10px;">Delete</button></a>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+
+<footer id="footer" class="padding-large">
+	<div class="container">
+	    <div class="row">
+
+	      <div class="col-md-3 mb-5">
+			<a href="index.html"><img src="images/logo-light.png" class="logo"></a>
+			<p>Vel non nibh vestibulum massa ullamcorper. Bibendum ultrices venenatis, id id sed mass commodo eros duis ut cras neque.</p>
+		    <p>©2023 TechLight / HTML template by <a href="https://templatesjungle.com/" class="link-primary fw-bold text-decoration-underline" target="_blank">TemplatesJungle</a></p>
+	      </div>
+
+	      <div class="col-md-3 mb-5">
+	        <h5>More from us</h5>
+	        <ul class="nav flex-column">
+	          <li class="nav-item"><a href="#" class="nav-link">iPhones</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">MacBook</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Best Laptop</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Best TV Deal</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Best Macbook Deals</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">eBay Coupons</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Amazon Coupons</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Laptop Coupons</a></li>	          
+	        </ul>
+	      </div>
+
+	      <div class="col-md-3 mb-5">
+	        <h5>About us</h5>
+	        <ul class="nav flex-column">
+	          <li class="nav-item"><a href="#" class="nav-link">Advertise</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">More About Us</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Newsletter</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Careers</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Help Center</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Sitemap</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Licensing</a></li>	          
+	        </ul>
+	      </div>
+
+	      <div class="col-md-3 mb-5">
+	        <h5>Policies</h5>
+	        <ul class="nav flex-column">
+	          <li class="nav-item"><a href="#" class="nav-link">Privacy Policy</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Terms of Use</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Cookies</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Information</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Compliance</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">GDPR Policy</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Sell informations</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Copyright</a></li>
+	        </ul>
+	      </div>
+
+	    </div>
+	</div>
+</footer>
+
+<!-- Video Popup -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog" role="document">
+
+	    <div class="modal-content">
+	      
+	        <div class="modal-body">
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg class="bi" width="40" height="40"><use xlink:href="#close-sharp"></use></svg></button>
+				<div class="ratio ratio-16x9">
+				  <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
+				</div>    
+	  	    </div>
+
+		</div>
+
+	</div>
+</div>
+<script>
+    function showSuccessAlert() {
+        alert("Your Blog is edited successfully !");
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Blog Post {% endblock %}
+
+{% block css %}
+{% endblock %}
+{% block content %}
+<form enctype="multipart/form-data" method="POST"> {% csrf_token %}
+<div class="container mt-4">
+{{ form.as_p }}
+<button style="border-radius: 10px;" onclick="showSuccessAlert()" class="btn btn-outline-dark">Update Blog</button>
+
+</div>
+</form>
+<script>
+    function showSuccessAlert() {
+        alert("Your Blog is edited successfully !");
+    }
+</script>
+{% endblock %}
+
+
+

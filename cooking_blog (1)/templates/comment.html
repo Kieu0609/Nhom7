@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% comment %} <section id="intro" class="bg-light padding-large">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        
+        <div class="page-title text-center">
+          <h2>Single Post</h2>
+          <div class="breadcum-items">
+            <span class="item"><a href="index.html">Home /</a></span>
+            <span class="item"><a href="blog.html">Blog /</a></span>
+            <span class="item colored">Single Post</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section> {% endcomment %}
+
+<section class="post-wrap padding-large">
+    <div class="container">
+        <div class="row">
+			<article class="post-item">
+				<div class="post-content">
+				  <div class="post-meta">
+				    <span class="post-category">{{post.dateTime}}</span> / <span class="meta-date"><a href="blog.html">Nguyet Kieu</a></span>
+				  </div>
+				  <h1 class="post-title">{{post.title}}</h1>
+				  <div class="hero-image col-lg-12 mt-5">
+				    <img src="/media/{{post.image}}/" alt="single-post" class="image-detail img-fluid">
+				  </div>
+				  <div class="post-description review-item pt-5">
+					<p>{{post.content}}</p>
+				   
+
+			
+			{% if user.is_authenticated %}
+      <div class="container">
+            <h2>Add Comments Here</h2>
+            <form action="{% url 'view_blog' post.slug %}" method="POST">
+				 {% csrf_token %}
+                  <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                              style="height: 100px" id="content" name="content"></textarea>
+                        <label for="floatingTextarea2">Leave a comment here.</label>
+                        <br>
+                        <button type="submit" onclick="showSuccessAlert()" class="btn btn-outline-info" style="border-radius: 10px;">Comment</button>
+                  </div>
+            </form>
+            {% else %}
+            <div class="container">
+                  <h4><a href="/login/">Login</a> to post comments below.</h4>
+                  {% endif %}
+                  <br>
+                  <h5>All Comments ({{comments.count}})</h5>
+                  <br>
+                  {% for comment in comments %}
+                  <div class="card">
+                        <div class="card-header">
+                              <span style="font-size: 22px;">{{comment.user}} </span> <span
+                                    style="font-size: 12px;">{{comment.dateTime}}</span>
+									<a href="/delete_comment/{{comment.id}}" >Xóa</a>
+                        </div>
+                        <div class="card-body">
+                              <h6 class="card-text">{{comment.content}}</h6>
+                        </div>
+                  </div>
+                  <br>
+                  {% endfor %}
+            </div>
+      </div>
+        </div>
+    </div>
+</section>
+<script>
+	function showSuccessAlert() {
+		alert("Your Blog is edited successfully !");
+	}
+</script>
+{% comment %} <section id="latest-posts" class="latest-posts margin-large no-margin-top">
+	<div class="container">
+		<div class="title-wrap d-flex justify-content-between">			
+			<div class="section-header">
+				<h4 class="elementary-title">Related Posts</h4>
+			</div><!--section-header-->
+			<a href="blog.html" class="button">All news<svg class="bi" width="18" height="18"><use xlink:href="#chevron-forward"></use></svg></a>
+		</div>
+		<div class="row">
+			<div class="post-item col-md-4">
+				<figure class="zoom-effect">
+					<a href="single-post.html" class="zoom-in"><img src="images/item1.jpg" alt="stories" class="blogImg img-fluid"></a>
+				</figure>
+				<div class="story-title-wrap mt-3">
+					<div class="post-meta"><a href="blog.html">Fashion</a></div>
+					<h3 class="story-title"><a href="single-post.html">10 Distinctive Features of the iPhone and iPod Touch</a></h3>				
+					<div class="entry-meta">
+						<span class="author"><span class="sp">by</span><span class="author-name">Jenny Matt</span></span>
+						<span class="meta-date"><span class="sp">-</span><time class="published" datetime="">Feb 12, 2022</time></span>
+					</div>
+				</div>
+			</div>
+			<div class="post-item col-md-4">
+				<figure class="zoom-effect">
+					<a href="single-post.html" class="zoom-in"><img src="images/item2.jpg" alt="stories" class="blogImg img-fluid"></a>
+				</figure>
+				<div class="story-title-wrap mt-3">
+					<div class="post-meta"><a href="blog.html">Fashion</a></div>
+					<h3 class="story-title"><a href="single-post.html">10 Things That Make the iPhone and iPod touch different</a></h3>				
+					<div class="entry-meta">
+						<span class="author"><span class="sp">by</span><span class="author-name">Jenny Matt</span></span>
+						<span class="meta-date"><span class="sp">-</span><time class="published" datetime="">Feb 12, 2022</time></span>
+					</div>
+				</div>
+			</div>
+			<div class="post-item col-md-4">
+				<figure class="zoom-effect">
+					<a href="single-post.html" class="zoom-in"><img src="images/item3.jpg" alt="stories" class="blogImg img-fluid"></a>
+				</figure>
+				<div class="story-title-wrap mt-3">
+					<div class="post-meta"><a href="blog.html">Fashion</a></div>
+					<h3 class="story-title"><a href="single-post.html">10 Things That Make the iPhone and iPod touch different</a></h3>				
+					<div class="entry-meta">
+						<span class="author"><span class="sp">by</span><span class="author-name">Jenny Matt</span></span>
+						<span class="meta-date"><span class="sp">-</span><time class="published" datetime="">Feb 12, 2022</time></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section> {% endcomment %}
+{% endblock %}

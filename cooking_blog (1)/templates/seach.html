@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row" >
+	{% for min in blogs %}
+	<div class="post-item col-md-3">
+		<figure class="zoom-effect">
+			<a href="single-post.html" class="zoom-in,centered"><img src="/media/{{min.image}}" alt="stories"
+					width="306px" height="458px" class="lgpostImg image-detail "></a>
+		</figure>
+		<div class="story-title-wrap mt-3">
+			<div class="post-meta"><a href="{% url 'view_blog' min.slug %}">{{min.title}}</h1></div>
+			<div class="story-title"><a href="single-post.html">{{min.content}}</a>
+			</div>
+
+			<div class="entry-meta">
+				<span class="author"><span class="sp">by: nguyet kieu</span><span
+						class="author-name">{{min.authur}}</span></span>
+				<span class="meta-date"><span class="sp">-</span><time class="published"
+						datetime="">{{min.dateTime}}</time></span>
+
+			</div>
+			<br>
+			<a href="{% url 'edit_blog_post' min.id %}"><button type="button" class="btn btn-outline-success"
+					style="border-radius: 10px;">Update</button></a>
+			<a href="{% url 'delete_blog_post' min.id %}"><button type="button" class="btn btn-outline-danger"
+					style="border-radius: 10px;">Delete</button></a>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}
